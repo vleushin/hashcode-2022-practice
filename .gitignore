@@ -1,0 +1,21 @@
+# Gradle
+build
+results
+.gradle
+classes
+generated/
+
+# Java
+*.hprof
+
+# IntelliJ IDEA
+.idea
+*.iml
+out
+
+# OS X
+.DS_Store
+
+# Docker
+volumes
+
