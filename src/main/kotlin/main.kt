@@ -17,15 +17,24 @@ fun main(args: Array<String>) {
         println("Likes: $ingredientLikes")
         println("Dislikes: $ingredientDislikes")
 
-        // super naive solution -- include all liked and exclude all disliked
-        val selectedIngredients = ingredientLikes.filter { it.value > 0 }.keys - ingredientDislikes.filter { it.value > 0 }.keys
+        // solution 1 -- include all liked and exclude all disliked
+        val selectedIngredients1 = ingredientLikes.filter { it.value > 0 }.keys - ingredientDislikes.filter { it.value > 0 }.keys
+
+        // solution 2 -- include only if more likes than dislikes
+        val selectedIngredients = ingredients.filter {
+            ingredientLikes[it]!! - ingredientDislikes[it]!! > 0 // or >=
+        }.toSet()
+
+        // solution 3 -- OR-tools
+        // val solution = findSolution(clients, ingredients.toList());
+
         val score = clients.filter {
             selectedIngredients.containsAll(it.likes)
                     && !it.dislikes.any { ingredient -> selectedIngredients.contains(ingredient) }
         }.size
 
         println("Selected ingredients: $selectedIngredients")
-        println("Score: $score")
+        println("Score: $score (max: ${clients.size})")
 
         writeToFile(inputFile.name, Pizza(selectedIngredients))
     }

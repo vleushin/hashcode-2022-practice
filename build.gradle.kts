@@ -13,6 +13,7 @@ repositories {
 }
 
 dependencies {
+    implementation("com.google.ortools:ortools-java:9.2.9972")
     testImplementation(kotlin("test-junit"))
 }
 
